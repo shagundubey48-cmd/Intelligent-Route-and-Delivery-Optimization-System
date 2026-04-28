@@ -21,9 +21,11 @@ public:
 
     void optimizeDeliveries();
     void assignVehicles();
-
+    void searchCity(string name);
     void tsp(int start);
     void compare(string src, string dest);
+    void saveCities();
+    void loadCities();
 };
 
 #endif
