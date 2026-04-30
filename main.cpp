@@ -26,7 +26,7 @@ cout << "\n1. Add City\n2. Connect Cities\n3. Add Delivery\n";
 cout << "4. Add Vehicle\n5. Optimize Deliveries\n";
 cout << "6. Assign Vehicles\n7. TSP\n8. Compare\n";
 cout << "9. Show Graph\n10. Search City\n";
-cout << "11. Save Cities\n12. Load Cities\n0. Exit\n";
+cout << "11. Save Cities\n12. Load Cities\n13. Optimal TSP (DP)\n0. Exit\n";
 
 setColor(7);
 cout << "\nEnter choice: ";
@@ -86,6 +86,12 @@ cin >> choice;
 }
 else if(choice == 11) sys.saveCities();
 else if(choice == 12) sys.loadCities();
+else if (choice == 13) {
+    int start;
+    cout << "Enter start city ID: ";
+    cin >> start;
+    sys.runTSP_DP(start);
+}
         
 
     } while(choice != 0);

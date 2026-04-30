@@ -26,6 +26,8 @@ public:
     void compare(string src, string dest);
     void saveCities();
     void loadCities();
+    int tspDP(int mask, int pos);
+    void runTSP_DP(int start);
 };
 
 #endif

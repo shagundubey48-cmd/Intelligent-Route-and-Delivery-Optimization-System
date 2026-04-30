@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <limits>
 #include "OptimizationSystem.h"
 #include <algorithm>
 #include <iomanip>
@@ -8,6 +8,42 @@ using namespace std;
 
 void line() {
     cout << "\n----------------------------------------\n";
+}
+#include <limits>
+
+vector<vector<int>> dp;
+int VISITED_ALL;
+
+int OptimizationSystem::tspDP(int mask, int pos) {
+    if (mask == VISITED_ALL)
+        return 0;
+
+    if (dp[mask][pos] != -1)
+        return dp[mask][pos];
+
+    int ans = INT_MAX;
+
+    for (int city = 0; city < graph.cities.size(); city++) {
+        if ((mask & (1 << city)) == 0) {
+float dx = graph.cities[pos].x - graph.cities[city].x;
+float dy = graph.cities[pos].y - graph.cities[city].y;
+float dist = sqrt(dx * dx + dy * dy);            int newAns = dist + tspDP(mask | (1 << city), city);
+            ans = min(ans, newAns);
+        }
+    }
+
+    return dp[mask][pos] = ans;
+}
+
+void OptimizationSystem::runTSP_DP(int start) {
+    int n = graph.cities.size();
+
+    VISITED_ALL = (1 << n) - 1;
+    dp.assign(1 << n, vector<int>(n, -1));
+
+    int result = tspDP(1 << start, start);
+
+    cout << "\nOptimal TSP Distance (DP): " << result << endl;
 }
 void OptimizationSystem::addCity(string name, float x, float y) {
     if(cityMap.count(name)) {
